@@ -24,17 +24,22 @@ const apiParams = {
   usingCdk: undefined,
 };
 
-const apiResource = await addApi(context, apiParams);
-
-if (apiResource) {
-  const functionParams = {
-    functionTemplate: 'Hello World',
-    resourceName: 'helloWorld',
-    service: 'Lambda',
-    functionPlugin: 'awscloudformation',
-    providerName: undefined,
-    dependsOn: [apiResource],
-  };
-
-  await createFunction(context, functionParams);
-}
+async function main() {
+    const apiResource = await addApi(context, apiParams);
+  
+    if (apiResource) {
+      const functionParams = {
+        functionTemplate: 'Hello World',
+        resourceName: 'helloWorld',
+        service: 'Lambda',
+        functionPlugin: 'awscloudformation',
+        providerName: undefined,
+        dependsOn: [apiResource],
+      };
+  
+      await createFunction(context, functionParams);
+    }
+  }
+  
+  main();
+  
